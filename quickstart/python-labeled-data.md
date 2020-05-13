@@ -1,17 +1,3 @@
----
-title: "Quickstart: Train with labels using the REST API and Python - Form Recognizer"
-titleSuffix: Azure Cognitive Services
-description: Learn how to use the Form Recognizer labeled data feature with the REST API and Python to train a custom model.
-author: PatrickFarley
-manager: nitinme
-
-ms.service: cognitive-services
-ms.subservice: forms-recognizer
-ms.topic: quickstart
-ms.date: 02/19/2020
-ms.author: pafarley
-
----
 
 # Train a Form Recognizer model with labels using REST API and Python
 

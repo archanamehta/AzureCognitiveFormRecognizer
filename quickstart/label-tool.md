@@ -12,7 +12,8 @@ To complete this quickstart, you must have:
 
 ## Create a Form Recognizer resource
 
-[!INCLUDE [create resource](../includes/create-resource.md)]
+[!INCLUDE [create resource](../includes/createresource.md)]
+
 
 ## Set up the sample labeling tool
 

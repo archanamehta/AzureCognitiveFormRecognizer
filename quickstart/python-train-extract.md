@@ -71,19 +71,21 @@ To train a Form Recognizer model with the documents in your Azure blob container
 1. At the prompt, use the `python` command to run the sample. For example, `python form-recognizer-train.py`.
 
 ## Ouput of Executing the above Pythong Code ie: form-recognizer-train.py is as follows 
- ```json
-POST model succeeded:
-{
-  'Content-Length': '0',
-  'Location': 'https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/custom/models/e16064cc-525e-49cf-ad08-9c594d792507',
-  'x-envoy-upstream-service-time': '30',
-  'apim-request-id': 'b812f718-b56b-4b14-bd8f-82d9b597e988',
-  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
-  'x-content-type-options': 'nosniff',
-  'Date': 'Wed, 13 May 2020 16:27:48 GMT'
-}
- ```
- 
+
+    ```json
+      POST model succeeded:
+      {
+        'Content-Length': '0',
+        'Location': 'https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/custom/models/e16064cc-525e-49cf-ad08-9c594d792507',
+        'x-envoy-upstream-service-time': '30',
+        'apim-request-id': 'b812f718-b56b-4b14-bd8f-82d9b597e988',
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+        'x-content-type-options': 'nosniff',
+        'Date': 'Wed, 13 May 2020 16:27:48 GMT'
+      }
+       ```
+
+
 ## Get training results
 
 After you've started the train operation, you use the returned ID to get the status of the operation. Add the following code to the bottom of your Python script. This uses the ID value from the training call in a new API call. The training operation is asynchronous, so this script calls the API at regular intervals until the training status is completed. We recommend an interval of one second or more.
@@ -118,7 +120,7 @@ while n_try < n_tries:
 print("Train operation did not complete within the allocated time.")
 ```
 
-OutPut of the Above Code to get the Training Results is as followd: 
+Output of the Above Code to get the Training Results is as follows:
 
 ```json
 Training succeeded:
@@ -182,10 +184,10 @@ Training succeeded:
 Copy the `"modelId"` value for use in the following steps.
 
 ## Analyze the Results 
-When the process is completed, you'll receive a `200 (Success)` response with JSON content in the following format. The response has been shortened for simplicity. The main key/value pair associations and tables are in the `"pageResults"` node. If you also specified plain text extraction through the *includeTextDetails* URL parameter, then the `"readResults"` node will show the content and positions of all the text in the document.
+Once the Training of the Model has been complete we need to Analyze results. When the process is completed, you'll receive a `200 (Success)` response with JSON content in the following format. The response has been shortened for simplicity. The main key/value pair associations and tables are in the `"pageResults"` node. If you also specified plain text extraction through the *includeTextDetails* URL parameter, then the `"readResults"` node will show the content and positions of all the text in the document.
 
 ```bash
-POSTanalyzesucceeded: {
+POST analyzesucceeded: {
   'Content-Length': '0',
   'Operation-Location': 'https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/custom/models/009ae39c-9742-4086-aa21-d6c9881b9879/analyzeresults/be6a72bb-90fc-4211-a65c-3d16b01d2879',
   'x-envoy-upstream-service-time': '87',
@@ -279,27 +281,27 @@ The confidence scores you target will depend on your use case, but generally it'
 
 ### Custom model
 Form Recognizer works on input documents that meet these requirements:
-Format must be JPG, PNG, PDF (text or scanned), or TIFF. Text-embedded PDFs are best because there's no possibility of error in character extraction and location.
-If your PDFs are password-locked, you must remove the lock before submitting them.
-PDF and TIFF documents must be 200 pages or less, and the total size of the training data set must be 500 pages or less.
-For images, dimensions must be between 600 x 100 pixels and 4200 x 4200 pixels.
-If scanned from paper documents, forms should be high-quality scans.
-Text must use the Latin alphabet (English characters).
-For unsupervised learning (without labeled data), data must contain keys and values.
-For unsupervised learning (without labeled data), keys must appear above or to the left of the values; they can't appear below or to the right.
-Form Recognizer doesn't currently support these types of input data:
 
-Complex tables (nested tables, merged headers or cells, and so on).
-Checkboxes or radio buttons.
+   1. Format must be JPG, PNG, PDF (text or scanned), or TIFF. Text-embedded PDFs are best because there's no possibility of error in character extraction and location.
+   2. If your PDFs are password-locked, you must remove the lock before submitting them.
+   3. PDF and TIFF documents must be 200 pages or less, and the total size of the training data set must be 500 pages or less.
+   4. For images, dimensions must be between 600 x 100 pixels and 4200 x 4200 pixels.
+   5. If scanned from paper documents, forms should be high-quality scans.
+   6. Text must use the Latin alphabet (English characters).
+   7. For unsupervised learning (without labeled data), data must contain keys and values.
+   8. For unsupervised learning (without labeled data), keys must appear above or to the left of the values; they can't appear below or to the right.
+   9. Form Recognizer doesn't currently support these types of input data:
+         * Complex tables (nested tables, merged headers or cells, and so on).
+         * Checkboxes or radio buttons.
 
 ### Prebuilt receipt model
 The input requirements for the receipt model are slightly different.
 
-Format must be JPEG, PNG, PDF (text or scanned) or TIFF.
-File size must be less than 20 MB.
-Image dimensions must be between 50 x 50 pixels and 10000 x 10000 pixels.
-PDF dimensions must be at most 17 x 17 inches, corresponding to Legal or A3 paper sizes and smaller.
-For PDF and TIFF, only the first 200 pages are processed (with a free tier subscription, only the first two pages are processed).
+      Format must be JPEG, PNG, PDF (text or scanned) or TIFF.
+      File size must be less than 20 MB.
+      Image dimensions must be between 50 x 50 pixels and 10000 x 10000 pixels.
+      PDF dimensions must be at most 17 x 17 inches, corresponding to Legal or A3 paper sizes and smaller.
+      For PDF and TIFF, only the first 200 pages are processed (with a free tier subscription, only the first two pages are processed).
 
 
 

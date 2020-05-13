@@ -71,6 +71,7 @@ To train a Form Recognizer model with the documents in your Azure blob container
 1. At the prompt, use the `python` command to run the sample. For example, `python form-recognizer-train.py`.
 
 ## Ouput of Executing the above Pythong Code ie: form-recognizer-train.py is as follows 
+ ```json
 POST model succeeded:
 {
   'Content-Length': '0',
@@ -81,7 +82,8 @@ POST model succeeded:
   'x-content-type-options': 'nosniff',
   'Date': 'Wed, 13 May 2020 16:27:48 GMT'
 }
-
+ ```
+ 
 ## Get training results
 
 After you've started the train operation, you use the returned ID to get the status of the operation. Add the following code to the bottom of your Python script. This uses the ID value from the training call in a new API call. The training operation is asynchronous, so this script calls the API at regular intervals until the training status is completed. We recommend an interval of one second or more.
@@ -116,10 +118,9 @@ while n_try < n_tries:
 print("Train operation did not complete within the allocated time.")
 ```
 
-When the training process is completed, you'll receive a `201 (Success)` response with JSON content like the following:
+OutPut of the Above Code to get the Training Results is as followd: 
 
 ```json
-
 Training succeeded:
 {
   "modelInfo": {
@@ -180,8 +181,7 @@ Training succeeded:
 
 Copy the `"modelId"` value for use in the following steps.
 
-## Analyze the Resutls 
-
+## Analyze the Results 
 When the process is completed, you'll receive a `200 (Success)` response with JSON content in the following format. The response has been shortened for simplicity. The main key/value pair associations and tables are in the `"pageResults"` node. If you also specified plain text extraction through the *includeTextDetails* URL parameter, then the `"readResults"` node will show the content and positions of all the text in the document.
 
 ```bash

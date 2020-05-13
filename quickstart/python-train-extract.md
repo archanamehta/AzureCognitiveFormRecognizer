@@ -72,7 +72,15 @@ To train a Form Recognizer model with the documents in your Azure blob container
 
 ## Ouput of Executing the above Pythong Code ie: form-recognizer-train.py is as follows 
 POST model succeeded:
-{'Content-Length': '0', 'Location': 'https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/custom/models/e16064cc-525e-49cf-ad08-9c594d792507', 'x-envoy-upstream-service-time': '30', 'apim-request-id': 'b812f718-b56b-4b14-bd8f-82d9b597e988', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'Date': 'Wed, 13 May 2020 16:27:48 GMT'}
+{
+  'Content-Length': '0',
+  'Location': 'https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/custom/models/e16064cc-525e-49cf-ad08-9c594d792507',
+  'x-envoy-upstream-service-time': '30',
+  'apim-request-id': 'b812f718-b56b-4b14-bd8f-82d9b597e988',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'x-content-type-options': 'nosniff',
+  'Date': 'Wed, 13 May 2020 16:27:48 GMT'
+}
 
 ## Get training results
 
@@ -113,9 +121,63 @@ When the training process is completed, you'll receive a `201 (Success)` respons
 ```json
 
 Training succeeded:
-{"modelInfo": {"modelId": "e16064cc-525e-49cf-ad08-9c594d792507", "status": "ready", "createdDateTime": "2020-05-13T16:27:49Z", "lastUpdatedDateTime": "2020-05-13T16:27:56Z"}, "trainResult": {"trainingDocuments": [{"documentName": "Invoice_1.pdf", "pages": 1, "errors": [], "status": "succeeded"}, {"documentName": "Invoice_2.pdf", "pages": 1, "errors": [], "status": "succeeded"}, {"documentName": "Invoice_3.pdf", "pages": 1, "errors": [], "status": "succeeded"}, {"documentName": "Invoice_4.pdf", "pages": 1, "errors": [], "status": "succeeded"}, {"documentName": "Invoice_5.pdf", "pages": 1, "errors": [], "status": "succeeded"}], "errors": []}}
-
-  
+{
+  "modelInfo": {
+    "modelId": "e16064cc-525e-49cf-ad08-9c594d792507",
+    "status": "ready",
+    "createdDateTime": "2020-05-13T16:27:49Z",
+    "lastUpdatedDateTime": "2020-05-13T16:27:56Z"
+  },
+  "trainResult": {
+    "trainingDocuments": [
+      {
+        "documentName": "Invoice_1.pdf",
+        "pages": 1,
+        "errors": [
+          
+        ],
+        "status": "succeeded"
+      },
+      {
+        "documentName": "Invoice_2.pdf",
+        "pages": 1,
+        "errors": [
+          
+        ],
+        "status": "succeeded"
+      },
+      {
+        "documentName": "Invoice_3.pdf",
+        "pages": 1,
+        "errors": [
+          
+        ],
+        "status": "succeeded"
+      },
+      {
+        "documentName": "Invoice_4.pdf",
+        "pages": 1,
+        "errors": [
+          
+        ],
+        "status": "succeeded"
+      },
+      {
+        "documentName": "Invoice_5.pdf",
+        "pages": 1,
+        "errors": [
+          
+        ],
+        "status": "succeeded"
+      }
+    ],
+    "errors": [
+      
+    ]
+  }
+}
+ 
+ 
   Copy the `"modelId"` value for use in the following steps.
 
 [!INCLUDE [analyze forms](../includes/python-custom-analyze.md)]

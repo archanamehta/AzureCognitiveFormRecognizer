@@ -176,11 +176,9 @@ Training succeeded:
     ]
   }
 }
- 
- 
-  Copy the `"modelId"` value for use in the following steps.
+```
 
-
+Copy the `"modelId"` value for use in the following steps.
 
 ## Analyze the Resutls 
 
@@ -269,11 +267,41 @@ POSTanalyzesucceeded: {
           },
     
     more more more Json  
-    
+```
     
 ## Improve results
+Examine the "confidence" values for each key/value result under the "pageResults" node. You should also look at the confidence scores in the "readResults" node, which correspond to the text read operation. The confidence of the read results does not affect the confidence of the key/value extraction results, so you should check both.
 
-[!INCLUDE [improve results](../includes/improve-results-unlabeled.md)]
+If the confidence scores for the read operation are low, try to improve the quality of your input documents (see Input requirements).
+If the confidence scores for the key/value extraction operation are low, ensure that the documents being analyzed are of the same type as documents used in the training set. If the documents in the training set have variations in appearance, consider splitting them into different folders and training one model for each variation.
+The confidence scores you target will depend on your use case, but generally it's a good practice to target a score of 80% or above. For more sensitive cases, like reading medical records or billing statements, a score of 100% is recommended.
+
+
+### Custom model
+Form Recognizer works on input documents that meet these requirements:
+Format must be JPG, PNG, PDF (text or scanned), or TIFF. Text-embedded PDFs are best because there's no possibility of error in character extraction and location.
+If your PDFs are password-locked, you must remove the lock before submitting them.
+PDF and TIFF documents must be 200 pages or less, and the total size of the training data set must be 500 pages or less.
+For images, dimensions must be between 600 x 100 pixels and 4200 x 4200 pixels.
+If scanned from paper documents, forms should be high-quality scans.
+Text must use the Latin alphabet (English characters).
+For unsupervised learning (without labeled data), data must contain keys and values.
+For unsupervised learning (without labeled data), keys must appear above or to the left of the values; they can't appear below or to the right.
+Form Recognizer doesn't currently support these types of input data:
+
+Complex tables (nested tables, merged headers or cells, and so on).
+Checkboxes or radio buttons.
+
+### Prebuilt receipt model
+The input requirements for the receipt model are slightly different.
+
+Format must be JPEG, PNG, PDF (text or scanned) or TIFF.
+File size must be less than 20 MB.
+Image dimensions must be between 50 x 50 pixels and 10000 x 10000 pixels.
+PDF dimensions must be at most 17 x 17 inches, corresponding to Legal or A3 paper sizes and smaller.
+For PDF and TIFF, only the first 200 pages are processed (with a free tier subscription, only the first two pages are processed).
+
+
 
 ## Next steps
 

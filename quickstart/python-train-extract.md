@@ -12,14 +12,12 @@ To complete this quickstart, you must have:
 
 ## Create a Form Recognizer resource
 
-[!INCLUDE [create resource](../includes/create-resource.md)]
+[!INCLUDE [create resource](../includes/createresource.md)]
+
 
 ## Train a Form Recognizer model
 
-First, you'll need a set of training data in an Azure Storage blob container. You should have a minimum of five filled-in forms (PDF documents and/or images) of the same type/structure as your main input data. Or, you can use a single empty form with two filled-in forms. The empty form's file name needs to include the word "empty." See [Build a training data set for a custom model](../build-training-data-set.md) for tips and options for putting together your training data.
-
-> [!NOTE]
-> You can use the labeled data feature to manually label some or all of your training data beforehand. This is a more complex process but results in a better trained model. See the [Train with labels](../overview.md#train-with-labels) section of the overview to learn more.
+   First, you'll need a set of training data in an Azure Storage blob container. You should have a minimum of five filled-in forms (PDF documents and/or images) of the same type/structure as your main input data. 
 
 To train a Form Recognizer model with the documents in your Azure blob container, call the **[Train Custom Model](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-preview/operations/TrainCustomModelAsync)** API by running the following python code. Before you run the code, make these changes:
 
@@ -35,7 +33,7 @@ To train a Form Recognizer model with the documents in your Azure blob container
     from requests import get, post
     
     # Endpoint URL
-    endpoint = r"<endpoint>"
+    endpoint = r"https://archie-fr.cognitiveservices.azure.com/"
     post_url = endpoint + r"/formrecognizer/v2.0-preview/custom/models"
     source = r"<SAS URL>"
     prefix = "<Blob folder name>"
@@ -71,6 +69,10 @@ To train a Form Recognizer model with the documents in your Azure blob container
 1. Save the code in a file with a .py extension. For example, *form-recognizer-train.py*.
 1. Open a command prompt window.
 1. At the prompt, use the `python` command to run the sample. For example, `python form-recognizer-train.py`.
+
+## Ouput of Executing the above Pythong Code ie: form-recognizer-train.py is as follows 
+POST model succeeded:
+{'Content-Length': '0', 'Location': 'https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/custom/models/e16064cc-525e-49cf-ad08-9c594d792507', 'x-envoy-upstream-service-time': '30', 'apim-request-id': 'b812f718-b56b-4b14-bd8f-82d9b597e988', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload', 'x-content-type-options': 'nosniff', 'Date': 'Wed, 13 May 2020 16:27:48 GMT'}
 
 ## Get training results
 
@@ -109,72 +111,12 @@ print("Train operation did not complete within the allocated time.")
 When the training process is completed, you'll receive a `201 (Success)` response with JSON content like the following:
 
 ```json
-{ 
-  "modelInfo":{ 
-    "status":"ready",
-    "createdDateTime":"2019-10-08T10:20:31.957784",
-    "lastUpdatedDateTime":"2019-10-08T14:20:41+00:00",
-    "modelId":"1cfb372bab404ba3aa59481ab2c63da5"
-  },
-  "trainResult":{ 
-    "trainingDocuments":[ 
-      { 
-        "documentName":"invoices\\Invoice_1.pdf",
-        "pages":1,
-        "errors":[ 
 
-        ],
-        "status":"succeeded"
-      },
-      { 
-        "documentName":"invoices\\Invoice_2.pdf",
-        "pages":1,
-        "errors":[ 
+Training succeeded:
+{"modelInfo": {"modelId": "e16064cc-525e-49cf-ad08-9c594d792507", "status": "ready", "createdDateTime": "2020-05-13T16:27:49Z", "lastUpdatedDateTime": "2020-05-13T16:27:56Z"}, "trainResult": {"trainingDocuments": [{"documentName": "Invoice_1.pdf", "pages": 1, "errors": [], "status": "succeeded"}, {"documentName": "Invoice_2.pdf", "pages": 1, "errors": [], "status": "succeeded"}, {"documentName": "Invoice_3.pdf", "pages": 1, "errors": [], "status": "succeeded"}, {"documentName": "Invoice_4.pdf", "pages": 1, "errors": [], "status": "succeeded"}, {"documentName": "Invoice_5.pdf", "pages": 1, "errors": [], "status": "succeeded"}], "errors": []}}
 
-        ],
-        "status":"succeeded"
-      },
-      { 
-        "documentName":"invoices\\Invoice_3.pdf",
-        "pages":1,
-        "errors":[ 
-
-        ],
-        "status":"succeeded"
-      },
-      { 
-        "documentName":"invoices\\Invoice_4.pdf",
-        "pages":1,
-        "errors":[ 
-
-        ],
-        "status":"succeeded"
-      },
-      { 
-        "documentName":"invoices\\Invoice_5.pdf",
-        "pages":1,
-        "errors":[ 
-
-        ],
-        "status":"succeeded"
-      }
-    ],
-    "errors":[ 
-
-    ]
-  },
-  "keys":{ 
-    "0":[ 
-      "Address:",
-      "Invoice For:",
-      "Microsoft",
-      "Page"
-    ]
-  }
-}
-```
-
-Copy the `"modelId"` value for use in the following steps.
+  
+  Copy the `"modelId"` value for use in the following steps.
 
 [!INCLUDE [analyze forms](../includes/python-custom-analyze.md)]
 

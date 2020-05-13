@@ -180,24 +180,40 @@ Training succeeded:
  
   Copy the `"modelId"` value for use in the following steps.
 
-[!INCLUDE [analyze forms](../includes/python-custom-analyze.md)]
+
+
+## Analyze the Resutls 
 
 When the process is completed, you'll receive a `200 (Success)` response with JSON content in the following format. The response has been shortened for simplicity. The main key/value pair associations and tables are in the `"pageResults"` node. If you also specified plain text extraction through the *includeTextDetails* URL parameter, then the `"readResults"` node will show the content and positions of all the text in the document.
 
 ```bash
+POSTanalyzesucceeded: {
+  'Content-Length': '0',
+  'Operation-Location': 'https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/custom/models/009ae39c-9742-4086-aa21-d6c9881b9879/analyzeresults/be6a72bb-90fc-4211-a65c-3d16b01d2879',
+  'x-envoy-upstream-service-time': '87',
+  'apim-request-id': 'fe81da67-997a-445d-bb8d-01fae29cca55',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'x-content-type-options': 'nosniff',
+  'Date': 'Wed, 13 May 2020 16:35:51 GMT'
+}
+
 {
-  "analyzeResult":{ 
-    "readResults":[ 
-      { 
-        "page":1,
-        "width":8.5,
-        "height":11.0,
-        "angle":0,
-        "unit":"inch",
-        "lines":[ 
-          { 
-            "text":"Contoso",
-            "boundingBox":[ 
+  "status": "succeeded",
+  "createdDateTime": "2020-05-13T16:35:52Z",
+  "lastUpdatedDateTime": "2020-05-13T16:35:53Z",
+  "analyzeResult": {
+    "version": "2.0.0",
+    "readResults": [
+      {
+        "page": 1,
+        "angle": 0,
+        "width": 8.5,
+        "height": 11.0,
+        "unit": "inch",
+        "lines": [
+          {
+            "text": "Contoso",
+            "boundingBox": [
               0.5278,
               1.0597,
               1.4569,
@@ -207,10 +223,10 @@ When the process is completed, you'll receive a `200 (Success)` response with JS
               0.5278,
               1.4347
             ],
-            "words":[ 
-              { 
-                "text":"Contoso",
-                "boundingBox":[ 
+            "words": [
+              {
+                "text": "Contoso",
+                "boundingBox": [
                   0.5278,
                   1.0597,
                   1.4569,
@@ -223,216 +239,38 @@ When the process is completed, you'll receive a `200 (Success)` response with JS
               }
             ]
           },
-          ...
-          { 
-            "text":"PT",
-            "boundingBox":[ 
-              6.2181,
-              3.3528,
-              6.3944,
-              3.3528,
-              6.3944,
-              3.5417,
-              6.2181,
-              3.5417
+          {
+            "text": "Address:",
+            "boundingBox": [
+              0.7972,
+              1.5125,
+              1.3958,
+              1.5125,
+              1.3958,
+              1.6431,
+              0.7972,
+              1.6431
             ],
-            "words":[ 
-              { 
-                "text":"PT",
-                "boundingBox":[ 
-                  6.2181,
-                  3.3528,
-                  6.3944,
-                  3.3528,
-                  6.3944,
-                  3.5417,
-                  6.2181,
-                  3.5417
+            "words": [
+              {
+                "text": "Address:",
+                "boundingBox": [
+                  0.7972,
+                  1.5125,
+                  1.3958,
+                  1.5125,
+                  1.3958,
+                  1.6431,
+                  0.7972,
+                  1.6431
                 ]
               }
             ]
-          }
-        ]
-      }
-    ],
-    "version":"2.0.0",
-    "errors":[ 
-
-    ],
-    "documentResults":[ 
-
-    ],
-    "pageResults":[ 
-      { 
-        "page":1,
-        "clusterId":1,
-        "keyValuePairs":[ 
-          { 
-            "key":{ 
-              "text":"Address:",
-              "boundingBox":[ 
-                0.7972,
-                1.5125,
-                1.3958,
-                1.5125,
-                1.3958,
-                1.6431,
-                0.7972,
-                1.6431
-              ],
-              "elements":[ 
-                "#/readResults/0/lines/1/words/0"
-              ]
-            },
-            "value":{ 
-              "text":"1 Redmond way Suite 6000 Redmond, WA 99243",
-              "boundingBox":[ 
-                0.7972,
-                1.6764,
-                2.15,
-                1.6764,
-                2.15,
-                2.2181,
-                0.7972,
-                2.2181
-              ],
-              "elements":[ 
-                "#/readResults/0/lines/4/words/0",
-                "#/readResults/0/lines/4/words/1",
-                "#/readResults/0/lines/4/words/2",
-                "#/readResults/0/lines/4/words/3",
-                "#/readResults/0/lines/6/words/0",
-                "#/readResults/0/lines/6/words/1",
-                "#/readResults/0/lines/6/words/2",
-                "#/readResults/0/lines/8/words/0"
-              ]
-            },
-            "confidence":0.86
           },
-          { 
-            "key":{ 
-              "text":"Invoice For:",
-              "boundingBox":[ 
-                4.3903,
-                1.5125,
-                5.1139,
-                1.5125,
-                5.1139,
-                1.6431,
-                4.3903,
-                1.6431
-              ],
-              "elements":[ 
-                "#/readResults/0/lines/2/words/0",
-                "#/readResults/0/lines/2/words/1"
-              ]
-            },
-            "value":{ 
-              "text":"Microsoft 1020 Enterprise Way Sunnayvale, CA 87659",
-              "boundingBox":[ 
-                5.1917,
-                1.4458,
-                6.6583,
-                1.4458,
-                6.6583,
-                2.0347,
-                5.1917,
-                2.0347
-              ],
-              "elements":[ 
-                "#/readResults/0/lines/3/words/0",
-                "#/readResults/0/lines/5/words/0",
-                "#/readResults/0/lines/5/words/1",
-                "#/readResults/0/lines/5/words/2",
-                "#/readResults/0/lines/7/words/0",
-                "#/readResults/0/lines/7/words/1",
-                "#/readResults/0/lines/7/words/2"
-              ]
-            },
-            "confidence":0.86
-          },
-          ...
-        ],
-        "tables":[ 
-          { 
-            "caption":null,
-            "rows":2,
-            "columns":5,
-            "cells":[ 
-              { 
-                "rowIndex":0,
-                "colIndex":0,
-                "header":true,
-                "text":"Invoice Number",
-                "boundingBox":[ 
-                  0.5347,
-                  2.8722,
-                  1.575,
-                  2.8722,
-                  1.575,
-                  3.0028,
-                  0.5347,
-                  3.0028
-                ],
-                "elements":[ 
-                  "#/readResults/0/lines/9/words/0",
-                  "#/readResults/0/lines/9/words/1"
-                ]
-              },
-              { 
-                "rowIndex":0,
-                "colIndex":1,
-                "header":true,
-                "text":"Invoice Date",
-                "boundingBox":[ 
-                  1.9403,
-                  2.8722,
-                  2.7569,
-                  2.8722,
-                  2.7569,
-                  3.0028,
-                  1.9403,
-                  3.0028
-                ],
-                "elements":[ 
-                  "#/readResults/0/lines/10/words/0",
-                  "#/readResults/0/lines/10/words/1"
-                ]
-              },
-              { 
-                "rowIndex":0,
-                "colIndex":2,
-                "header":true,
-                "text":"Invoice Due Date",
-                "boundingBox":[ 
-                  3.3403,
-                  2.8722,
-                  4.4583,
-                  2.8722,
-                  4.4583,
-                  3.0028,
-                  3.3403,
-                  3.0028
-                ],
-                "elements":[ 
-                  "#/readResults/0/lines/11/words/0",
-                  "#/readResults/0/lines/11/words/1",
-                  "#/readResults/0/lines/11/words/2"
-                ]
-              },
-              ...
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "lastUpdatedDateTime":"2019-10-07T19:32:18+00:00",
-  "status":"succeeded",
-  "createdDateTime":"2019-10-07T19:32:15+00:00"
-}
-```
-
+    
+    more more more Json  
+    
+    
 ## Improve results
 
 [!INCLUDE [improve results](../includes/improve-results-unlabeled.md)]

@@ -1,16 +1,3 @@
----
-title: "Quickstart: Form Recognizer client library for .NET"
-description: Get started with the Form Recognizer client library for .NET to train, extract, analyze, and get structured data output with this quickstart.
-services: cognitive-services
-author: PatrickFarley
-manager: nitinme
-ms.service: cognitive-services
-ms.subservice: forms-recognizer
-ms.topic: quickstart
-ms.date: 04/14/2020
-ms.author: pafarley
----
-
 # Quickstart: Form Recognizer client library for .NET
 
 Get started with the Form Recognizer client library for .NET. Form Recognizer is a Cognitive Service that uses machine learning technology to identify and extract key/value pairs and table data from form documents. It then outputs structured data that includes the relationships in the original file. Follow these steps to install the SDK package and try out the example code for basic tasks.

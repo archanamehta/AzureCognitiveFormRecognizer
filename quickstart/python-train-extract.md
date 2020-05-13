@@ -282,17 +282,17 @@ The confidence scores you target will depend on your use case, but generally it'
 ### Custom model
 Form Recognizer works on input documents that meet these requirements:
 
-   1. Format must be JPG, PNG, PDF (text or scanned), or TIFF. Text-embedded PDFs are best because there's no possibility of error in character extraction and location.
-   2. If your PDFs are password-locked, you must remove the lock before submitting them.
-   3. PDF and TIFF documents must be 200 pages or less, and the total size of the training data set must be 500 pages or less.
-   4. For images, dimensions must be between 600 x 100 pixels and 4200 x 4200 pixels.
-   5. If scanned from paper documents, forms should be high-quality scans.
-   6. Text must use the Latin alphabet (English characters).
-   7. For unsupervised learning (without labeled data), data must contain keys and values.
-   8. For unsupervised learning (without labeled data), keys must appear above or to the left of the values; they can't appear below or to the right.
-   9. Form Recognizer doesn't currently support these types of input data:
-         * Complex tables (nested tables, merged headers or cells, and so on).
-         * Checkboxes or radio buttons.
+      1. Format must be JPG, PNG, PDF (text or scanned), or TIFF. Text-embedded PDFs are best because there's no possibility of error in character extraction and location.
+      2. If your PDFs are password-locked, you must remove the lock before submitting them.
+      3. PDF and TIFF documents must be 200 pages or less, and the total size of the training data set must be 500 pages or less.
+      4. For images, dimensions must be between 600 x 100 pixels and 4200 x 4200 pixels.
+      5. If scanned from paper documents, forms should be high-quality scans.
+      6. Text must use the Latin alphabet (English characters).
+      7. For unsupervised learning (without labeled data), data must contain keys and values.
+      8. For unsupervised learning (without labeled data), keys must appear above or to the left of the values; they can't appear below or to the right.
+      9. Form Recognizer doesn't currently support these types of input data:
+            * Complex tables (nested tables, merged headers or cells, and so on).
+            * Checkboxes or radio buttons.
 
 ### Prebuilt receipt model
 The input requirements for the receipt model are slightly different.
@@ -304,10 +304,7 @@ The input requirements for the receipt model are slightly different.
       For PDF and TIFF, only the first 200 pages are processed (with a free tier subscription, only the first two pages are processed).
 
 
-
 ## Next steps
-
 In this quickstart, you used the Form Recognizer REST API with Python to train a model and run it in a sample scenario. Next, see the reference documentation to explore the Form Recognizer API in more depth.
 
-> [!div class="nextstepaction"]
 > [REST API reference documentation](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-preview/operations/AnalyzeWithCustomForm)

@@ -44,14 +44,14 @@ Follow a quickstart to get started extracting data from your forms. We recommend
 
 * Custom - train a model to your forms
   * Train without labels
-    * [Quickstart: Train a Form Recognizer model and extract form data by using the REST API with Python](quickstarts/python-train-extract.md)
+    * [Quickstart: Train a Form Recognizer model and extract form data by using the REST API with Python](quickstart/python-train-extract.md)
   * Train with labels
-    * [Train a Form Recognizer model with labels using the sample labeling tool](quickstarts/label-tool.md)
-    * [Train a Form Recognizer model with labels using REST API and Python](quickstarts/python-labeled-data.md)
+    * [Train a Form Recognizer model with labels using the sample labeling tool](quickstart/label-tool.md)
+    * [Train a Form Recognizer model with labels using REST API and Python](quickstart/python-labeled-data.md)
 * Prebuilt receipts - extract data from USA sales receipts
-  * [Quickstart: Extract receipt data using Python](quickstarts/python-receipts.md)
+  * [Quickstart: Extract receipt data using Python](quickstart/python-receipts.md)
 * Layout - extract text and table structure from forms
-  * [Quickstart: Extract layout data using Python](quickstarts/python-layout.md)
+  * [Quickstart: Extract layout data using Python](quickstart/python-layout.md)
 
 ### Review the REST APIs
 

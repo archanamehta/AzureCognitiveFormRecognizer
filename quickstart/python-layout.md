@@ -55,31 +55,7 @@ To start analyzing the layout, you call the **[Analyze Layout](https://westus2.d
     except Exception as e:
         print("POST analyze failed:\n%s" % str(e))
         quit()
-
-    n_tries = 10
-    n_try = 0
-    wait_sec = 6
-    while n_try < n_tries:
-        try:
-            resp = get(url = get_url, headers = {"Ocp-Apim-Subscription-Key": apim_key})
-            resp_json = json.loads(resp.text)
-            if resp.status_code != 200:
-                print("GET Layout results failed:\n%s" % resp_json)
-                quit()
-            status = resp_json["status"]
-            if status == "succeeded":
-                print("Layout Analysis succeeded:\n%s" % resp_json)
-                quit()
-            if status == "failed":
-                print("Layout Analysis failed:\n%s" % resp_json)
-                quit()
-            # Analysis still running. Wait and retry.
-            time.sleep(wait_sec)
-            n_try += 1     
-        except Exception as e:
-            msg = "GET analyze results failed:\n%s" % str(e)
-            print(msg)
-            quit()
+        
     ```
 
 1. Save the code in a file with a .py extension. For example, *form-recognizer-layout.py*.
@@ -106,7 +82,9 @@ https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/layout
 
 
 ## Get the layout results
-After you've called the **Analyze Layout** API, you call the **[Get Analyze Layout Result](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-preview/operations/GetAnalyzeLayoutResult)** API to get the status of the operation and the extracted data. Add the following code to the bottom of your Python script. This code uses the operation ID value in a new API call. This script calls the API at regular intervals until the results are available. We recommend an interval of one second or more.
+After you've called the **Analyze Layout** API, you call the **[Get Analyze Layout Result](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-preview/operations/GetAnalyzeLayoutResult)** API to get the status of the operation and the extracted data. Add the following code to the bottom of your Python script. This code uses the operation ID value in a new API call. 
+
+Append the following Python code to the 'form-recognizer-layout.py'
 
 ```python
 n_tries = 10

@@ -89,11 +89,23 @@ To start analyzing the layout, you call the **[Analyze Layout](https://westus2.d
 You'll receive a `202 (Success)` response that includes an **Operation-Location** header, which the script will print to the console. This header contains an operation ID that you can use to query the status of the asynchronous operation and get the results. In the following example value, the string after `operations/` is the operation ID.
 
 ```console
-https://cognitiveservice/formrecognizer/v2.0-preview/layout/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb
+https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/layout/analyzeResults/c26fe8cc-3e6f-48fc-979d-cc0e70fa8d11
 ```
 
-## Get the layout results
+## Results of executing form-recognizer-layout.py
 
+    POSTanalyzesucceeded: {
+      'Content-Length': '0',
+      'Operation-Location': 'https://archie-fr.cognitiveservices.azure.com/formrecognizer/v2.0-preview/layout/analyzeResults/c26fe8cc-3e6f-48fc-979d-cc0e70fa8d11',
+      'x-envoy-upstream-service-time': '137',
+      'apim-request-id': 'c26fe8cc-3e6f-48fc-979d-cc0e70fa8d11',
+      'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+      'x-content-type-options': 'nosniff',
+      'Date': 'Wed, 13 May 2020 18:23:58 GMT'
+    }
+
+
+## Get the layout results
 After you've called the **Analyze Layout** API, you call the **[Get Analyze Layout Result](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-preview/operations/GetAnalyzeLayoutResult)** API to get the status of the operation and the extracted data. Add the following code to the bottom of your Python script. This code uses the operation ID value in a new API call. This script calls the API at regular intervals until the results are available. We recommend an interval of one second or more.
 
 ```python
@@ -126,34 +138,34 @@ while n_try < n_tries:
 1. Save the script.
 1. Again use the `python` command to run the sample. For example, `python form-recognizer-layout.py`.
 
+
 ### Examine the response
 
 The script will print responses to the console until the **Analyze Layout** operation completes. Then, it will print the extracted data in JSON format. The `"readResults"` node contains every line of text with its respective bounding box placement on the page. The `"pageResults"` field shows every piece of text within tables, each with its row-column coordinate.
 
 See the following invoice image and its corresponding JSON output. The output has been shortened for simplicity.
 
-> [!div class="mx-imgBorder"]
 > ![Contoso invoice document with a table](../media/contoso-invoice.png)
 
+
 ```json
-{ 
-  "status":"succeeded",
-  "createdDateTime":"2019-11-12T19:55:36Z",
-  "lastUpdatedDateTime":"2019-11-12T19:55:43Z",
-  "analyzeResult":{ 
-    "version":"2.0.0",
-    "readResults":[ 
-      { 
-        "page":1,
-        "language":"en",
-        "angle":0,
-        "width":8.5,
-        "height":11,
-        "unit":"inch",
-        "lines":[ 
-          { 
-            "language":"en",
-            "boundingBox":[ 
+LayoutAnalysissucceeded: {
+  'status': 'succeeded',
+  'createdDateTime': '2020-05-13T18:23:59Z',
+  'lastUpdatedDateTime': '2020-05-13T18:24:04Z',
+  'analyzeResult': {
+    'version': '2.0.0',
+    'readResults': [
+      {
+        'page': 1,
+        'language': 'en',
+        'angle': 0,
+        'width': 8.5,
+        'height': 11,
+        'unit': 'inch',
+        'lines': [
+          {
+            'boundingBox': [
               0.5384,
               1.1583,
               1.4466,
@@ -163,10 +175,10 @@ See the following invoice image and its corresponding JSON output. The output ha
               0.5384,
               1.3534
             ],
-            "text":"Contoso",
-            "words":[ 
-              { 
-                "boundingBox":[ 
+            'text': 'Contoso',
+            'words': [
+              {
+                'boundingBox': [
                   0.5384,
                   1.1583,
                   1.4466,
@@ -176,14 +188,13 @@ See the following invoice image and its corresponding JSON output. The output ha
                   0.5384,
                   1.3534
                 ],
-                "text":"Contoso",
-                "confidence":1
+                'text': 'Contoso',
+                'confidence': 1
               }
             ]
           },
-          { 
-            "language":"en",
-            "boundingBox":[ 
+          {
+            'boundingBox': [
               0.7994,
               1.5143,
               1.3836,
@@ -193,10 +204,10 @@ See the following invoice image and its corresponding JSON output. The output ha
               0.7994,
               1.6154
             ],
-            "text":"Address:",
-            "words":[ 
-              { 
-                "boundingBox":[ 
+            'text': 'Address:',
+            'words': [
+              {
+                'boundingBox': [
                   0.7994,
                   1.5143,
                   1.3836,
@@ -206,84 +217,87 @@ See the following invoice image and its corresponding JSON output. The output ha
                   0.7994,
                   1.6154
                 ],
-                "text":"Address:",
-                "confidence":1
+                'text': 'Address:',
+                'confidence': 1
               }
             ]
           },
-          ...
-          { 
-            "language":"en",
-            "boundingBox":[ 
-              6.2285,
-              3.4114,
-              6.3919,
-              3.4114,
-              6.3919,
-              3.5119,
-              6.2285,
-              3.5119
+          {
+            'boundingBox': [
+              4.4033,
+              1.5114,
+              5.8155,
+              1.5114,
+              5.8155,
+              1.6155,
+              4.4033,
+              1.6155
             ],
-            "text":"PT",
-            "words":[ 
-              { 
-                "boundingBox":[ 
-                  6.2285,
-                  3.4114,
-                  6.3919,
-                  3.4114,
-                  6.3919,
-                  3.5119,
-                  6.2285,
-                  3.5119
+            'text': 'Invoice For: Microsoft',
+            'words': [
+              {
+                'boundingBox': [
+                  4.4033,
+                  1.5143,
+                  4.8234,
+                  1.5143,
+                  4.8234,
+                  1.6155,
+                  4.4033,
+                  1.6155
                 ],
-                "text":"PT",
-                "confidence":1
+                'text': 'Invoice',
+                'confidence': 1
+              },
+              {
+                'boundingBox': [
+                  4.8793,
+                  1.5143,
+                  5.1013,
+                  1.5143,
+                  5.1013,
+                  1.6154,
+                  4.8793,
+                  1.6154
+                ],
+                'text': 'For:',
+                'confidence': 1
+              },
+              {
+                'boundingBox': [
+                  5.2045,
+                  1.5114,
+                  5.8155,
+                  1.5114,
+                  5.8155,
+                  1.6151,
+                  5.2045,
+                  1.6151
+                ],
+                'text': 'Microsoft',
+                'confidence': 1
               }
             ]
-          }
-        ]
-      }
-    ],
-    "pageResults":[ 
-      { 
-        "page":1,
-        "tables":[ 
-          { 
-            "rows":2,
-            "columns":6,
-            "cells":[ 
-              { 
-                "rowIndex":0,
-                "columnIndex":0,
-                "text":"Invoice Number",
-                "boundingBox":[ 
-                  0.5075,
-                  2.8088,
-                  1.9061,
-                  2.8088,
-                  1.9061,
-                  3.3219,
-                  0.5075,
-                  3.3219
-                ],
-                "elements":[ 
-                  "#/readResults/0/lines/8/words/0",
-                  "#/readResults/0/lines/8/words/1"
-                ]
-              },
-              ...
-            ]
-          }
-        ]
-      }
-    ]
-  }
-}
+          },
+          {
+            'boundingBox': [
+              0.8106,
+              1.7033,
+              2.1445,
+              1.7033,
+              2.1445,
+              1.8342,
+              0.8106,
+              1.8342
+            ],
+            'text': '1 Redmond way Suite',
+            'words': [
+            ..............
+            ...............
 ```
 
-## Next steps
 
+## Next steps
 In this quickstart, you used the Form Recognizer REST API with Python to extract the text layout of an invoice. Next, see the reference documentation to explore the Form Recognizer API in more depth.
 
 > [!div class="nextstepaction"]

@@ -1,6 +1,20 @@
+---
+title: "Quickstart: Label forms, train a model, and analyze a form using the sample labeling tool - Form Recognizer"
+titleSuffix: Azure Cognitive Services
+description: In this quickstart, you'll use the Form Recognizer sample labeling tool to manually label form documents. Then you'll train a custom model with the labeled documents and use the model to extract key/value pairs.
+author: PatrickFarley
+manager: nitinme
+
+ms.service: cognitive-services
+ms.subservice: forms-recognizer
+ms.topic: quickstart
+ms.date: 04/14/2020
+ms.author: pafarley
+---
+
 # Train a Form Recognizer model with labels using the sample labeling tool
 
-In this quickstart, you'll use the Form Recognizer REST API with the sample labeling tool to train a custom model with manually labeled data. See the [Train with labels](../Overview.md#train-with-labels) section of the overview to learn more about this feature.
+In this quickstart, you'll use the Form Recognizer REST API with the sample labeling tool to train a custom model with manually labeled data. See the [Train with labels](../overview.md#train-with-labels) section of the overview to learn more about this feature.
 
 If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
 
@@ -8,12 +22,11 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 
 To complete this quickstart, you must have:
 
-- A set of at least six forms of the same type. You'll use this data to train the model and test a form. You can use a [sample data set](https://github.com/archanamehta/AzureCognitiveFormRecognizer/tree/master/sample_data) and download sample_data.zip file. Upload the training files to the root of a blob storage container in an Azure Storage account.
+- A set of at least six forms of the same type. You'll use this data to train the model and test a form. You can use a [sample data set](https://go.microsoft.com/fwlink/?linkid=2090451) for this quickstart. Upload the training files to the root of a blob storage container in an Azure Storage account.
 
 ## Create a Form Recognizer resource
 
-[!INCLUDE [create resource](../includes/createresource.md)]
-
+[!INCLUDE [create resource](../includes/create-resource.md)]
 
 ## Set up the sample labeling tool
 

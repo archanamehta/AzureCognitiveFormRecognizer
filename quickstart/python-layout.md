@@ -87,30 +87,30 @@ After you've called the **Analyze Layout** API, you call the **[Get Analyze Layo
 Append the following Python code to the 'form-recognizer-layout.py'
 
 ```python
-n_tries = 10
-n_try = 0
-wait_sec = 6
-while n_try < n_tries:
-    try:
-        resp = get(url = get_url, headers = {"Ocp-Apim-Subscription-Key": apim_key})
-        resp_json = json.loads(resp.text)
-        if resp.status_code != 200:
-            print("GET Layout results failed:\n%s" % resp_json)
+    n_tries = 10
+    n_try = 0
+    wait_sec = 6
+    while n_try < n_tries:
+        try:
+            resp = get(url = get_url, headers = {"Ocp-Apim-Subscription-Key": apim_key})
+            resp_json = json.loads(resp.text)
+            if resp.status_code != 200:
+                print("GET Layout results failed:\n%s" % resp_json)
+                quit()
+            status = resp_json["status"]
+            if status == "succeeded":
+                print("Layout Analysis succeeded:\n%s" % resp_json)
+                quit()
+            if status == "failed":
+                print("Layout Analysis failed:\n%s" % resp_json)
+                quit()
+            # Analysis still running. Wait and retry.
+            time.sleep(wait_sec)
+            n_try += 1     
+        except Exception as e:
+            msg = "GET analyze results failed:\n%s" % str(e)
+            print(msg)
             quit()
-        status = resp_json["status"]
-        if status == "succeeded":
-            print("Layout Analysis succeeded:\n%s" % resp_json)
-            quit()
-        if status == "failed":
-            print("Layout Analysis failed:\n%s" % resp_json)
-            quit()
-        # Analysis still running. Wait and retry.
-        time.sleep(wait_sec)
-        n_try += 1     
-    except Exception as e:
-        msg = "GET analyze results failed:\n%s" % str(e)
-        print(msg)
-        quit()
 ```
 
 1. Save the script.
@@ -126,35 +126,23 @@ See the following invoice image and its corresponding JSON output. The output ha
 > ![Contoso invoice document with a table](../media/contoso-invoice.png)
 
 
-```json
-LayoutAnalysissucceeded: {
-  'status': 'succeeded',
-  'createdDateTime': '2020-05-13T18:23:59Z',
-  'lastUpdatedDateTime': '2020-05-13T18:24:04Z',
-  'analyzeResult': {
-    'version': '2.0.0',
-    'readResults': [
-      {
-        'page': 1,
-        'language': 'en',
-        'angle': 0,
-        'width': 8.5,
-        'height': 11,
-        'unit': 'inch',
-        'lines': [
+    ```json
+
+    LayoutAnalysissucceeded: {
+      'status': 'succeeded',
+      'createdDateTime': '2020-05-13T18:23:59Z',
+      'lastUpdatedDateTime': '2020-05-13T18:24:04Z',
+      'analyzeResult': {
+        'version': '2.0.0',
+        'readResults': [
           {
-            'boundingBox': [
-              0.5384,
-              1.1583,
-              1.4466,
-              1.1583,
-              1.4466,
-              1.3534,
-              0.5384,
-              1.3534
-            ],
-            'text': 'Contoso',
-            'words': [
+            'page': 1,
+            'language': 'en',
+            'angle': 0,
+            'width': 8.5,
+            'height': 11,
+            'unit': 'inch',
+            'lines': [
               {
                 'boundingBox': [
                   0.5384,
@@ -167,23 +155,23 @@ LayoutAnalysissucceeded: {
                   1.3534
                 ],
                 'text': 'Contoso',
-                'confidence': 1
-              }
-            ]
-          },
-          {
-            'boundingBox': [
-              0.7994,
-              1.5143,
-              1.3836,
-              1.5143,
-              1.3836,
-              1.6154,
-              0.7994,
-              1.6154
-            ],
-            'text': 'Address:',
-            'words': [
+                'words': [
+                  {
+                    'boundingBox': [
+                      0.5384,
+                      1.1583,
+                      1.4466,
+                      1.1583,
+                      1.4466,
+                      1.3534,
+                      0.5384,
+                      1.3534
+                    ],
+                    'text': 'Contoso',
+                    'confidence': 1
+                  }
+                ]
+              },
               {
                 'boundingBox': [
                   0.7994,
@@ -196,83 +184,96 @@ LayoutAnalysissucceeded: {
                   1.6154
                 ],
                 'text': 'Address:',
-                'confidence': 1
-              }
-            ]
-          },
-          {
-            'boundingBox': [
-              4.4033,
-              1.5114,
-              5.8155,
-              1.5114,
-              5.8155,
-              1.6155,
-              4.4033,
-              1.6155
-            ],
-            'text': 'Invoice For: Microsoft',
-            'words': [
+                'words': [
+                  {
+                    'boundingBox': [
+                      0.7994,
+                      1.5143,
+                      1.3836,
+                      1.5143,
+                      1.3836,
+                      1.6154,
+                      0.7994,
+                      1.6154
+                    ],
+                    'text': 'Address:',
+                    'confidence': 1
+                  }
+                ]
+              },
               {
                 'boundingBox': [
                   4.4033,
-                  1.5143,
-                  4.8234,
-                  1.5143,
-                  4.8234,
+                  1.5114,
+                  5.8155,
+                  1.5114,
+                  5.8155,
                   1.6155,
                   4.4033,
                   1.6155
                 ],
-                'text': 'Invoice',
-                'confidence': 1
+                'text': 'Invoice For: Microsoft',
+                'words': [
+                  {
+                    'boundingBox': [
+                      4.4033,
+                      1.5143,
+                      4.8234,
+                      1.5143,
+                      4.8234,
+                      1.6155,
+                      4.4033,
+                      1.6155
+                    ],
+                    'text': 'Invoice',
+                    'confidence': 1
+                  },
+                  {
+                    'boundingBox': [
+                      4.8793,
+                      1.5143,
+                      5.1013,
+                      1.5143,
+                      5.1013,
+                      1.6154,
+                      4.8793,
+                      1.6154
+                    ],
+                    'text': 'For:',
+                    'confidence': 1
+                  },
+                  {
+                    'boundingBox': [
+                      5.2045,
+                      1.5114,
+                      5.8155,
+                      1.5114,
+                      5.8155,
+                      1.6151,
+                      5.2045,
+                      1.6151
+                    ],
+                    'text': 'Microsoft',
+                    'confidence': 1
+                  }
+                ]
               },
               {
                 'boundingBox': [
-                  4.8793,
-                  1.5143,
-                  5.1013,
-                  1.5143,
-                  5.1013,
-                  1.6154,
-                  4.8793,
-                  1.6154
+                  0.8106,
+                  1.7033,
+                  2.1445,
+                  1.7033,
+                  2.1445,
+                  1.8342,
+                  0.8106,
+                  1.8342
                 ],
-                'text': 'For:',
-                'confidence': 1
-              },
-              {
-                'boundingBox': [
-                  5.2045,
-                  1.5114,
-                  5.8155,
-                  1.5114,
-                  5.8155,
-                  1.6151,
-                  5.2045,
-                  1.6151
-                ],
-                'text': 'Microsoft',
-                'confidence': 1
-              }
-            ]
-          },
-          {
-            'boundingBox': [
-              0.8106,
-              1.7033,
-              2.1445,
-              1.7033,
-              2.1445,
-              1.8342,
-              0.8106,
-              1.8342
-            ],
-            'text': '1 Redmond way Suite',
-            'words': [
-            ..............
-            ...............
-```
+                'text': '1 Redmond way Suite',
+                'words': [
+                ..............
+                ...............
+    ```
 
 
 ## Next steps

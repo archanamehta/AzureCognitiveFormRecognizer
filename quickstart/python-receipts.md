@@ -1,18 +1,3 @@
----
-title: "Quickstart: Extract receipt data using Python - Form Recognizer"
-titleSuffix: Azure Cognitive Services
-description: In this quickstart, you'll use the Form Recognizer REST API with Python to extract data from images of USA sales receipts.
-author: PatrickFarley
-manager: nitinme
-
-ms.service: cognitive-services
-ms.subservice: forms-recognizer
-ms.topic: quickstart
-ms.date: 01/27/2020
-ms.author: pafarley
-#Customer intent: As a developer or data scientist familiar with Python, I want to learn how to use a prebuilt Form Recognizer model to extract my receipt data.
----
-
 # Quickstart: Extract receipt data using the Form Recognizer REST API with Python
 
 In this quickstart, you'll use the Azure Form Recognizer REST API with Python to extract and identify relevant information in USA sales receipts.
